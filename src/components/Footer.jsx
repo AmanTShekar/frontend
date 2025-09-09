@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import API_BASE from "../config";
+import { API_BASE } from "../utils/config"; // Use API_BASE
 
 const Offers = () => {
   const [offers, setOffers] = useState([]);
@@ -72,3 +72,4 @@ const Offers = () => {
 };
 
 export default Offers;
+
