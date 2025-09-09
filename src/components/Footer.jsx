@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import API_BASE from "../config";
 
 const Offers = () => {
   const [offers, setOffers] = useState([]);
@@ -7,7 +8,7 @@ const Offers = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/offers")
+      .get(`${API_BASE}/offers`)
       .then((res) => {
         setOffers(res.data);
         setLoading(false);
@@ -23,7 +24,6 @@ const Offers = () => {
       <h1 className="mb-5 fw-bold" style={{ fontSize: "2.5rem" }}>
         🔥 Current Offers
       </h1>
-
       <div className="d-flex flex-wrap justify-content-center gap-4">
         {loading ? (
           <p className="text-muted">Loading offers...</p>
