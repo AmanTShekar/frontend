@@ -20,8 +20,8 @@
     "react-router-dom": "^6.4.0",
     "react-scripts": "5.0.1",
     "redux": "^4.2.0",
-    "web-vitals": "^2.1.4"
-    "axios": "^1.6.7",   // version may vary
+    "web-vitals": "^2.1.4",
+    "axios": "^1.6.7", 
   },
   "scripts": {
     "start": "react-scripts start",
@@ -52,8 +52,9 @@
     "concurrently": "^9.2.1",
     "json-server": "^1.0.0-beta.3",
     "postcss": "^8.5.6",
-    "tailwindcss": "^4.1.13"
+    "tailwindcss": "^4.1.13",
     "@babel/plugin-proposal-private-property-in-object": "^7.25.0"
   }
 }
+
 
