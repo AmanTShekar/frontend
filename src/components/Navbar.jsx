@@ -12,33 +12,17 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    dispatch(logout());
-    localStorage.removeItem("user");
-    navigate("/login");
+    dispatch(logout());          // clears Redux state and localStorage
+    navigate("/login");          // redirect
   };
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark" style={{ backgroundColor: "#111" }}>
       <div className="container">
-        {/* Brand */}
-        <Link className="navbar-brand fw-bold fs-3" to="/">
-          🛍️ MyShop
-        </Link>
-
-        {/* Mobile Toggler */}
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
+        <Link className="navbar-brand fw-bold fs-3" to="/">🛍️ MyShop</Link>
+        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
           <span className="navbar-toggler-icon"></span>
         </button>
-
-        {/* Navbar Links */}
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto align-items-lg-center">
             {["Home", "Product", "Contact", "Cart"].map((item) => (
@@ -81,24 +65,10 @@ const Navbar = () => {
                   👤 {auth.user?.name || "User"}
                 </button>
                 <ul className="dropdown-menu dropdown-menu-end">
-                  <li>
-                    <span className="dropdown-item" onClick={() => navigate("/profile")} style={{ cursor: "pointer" }}>
-                      Profile
-                    </span>
-                  </li>
-                  <li>
-                    <span className="dropdown-item" onClick={() => navigate("/orders")} style={{ cursor: "pointer" }}>
-                      My Orders
-                    </span>
-                  </li>
-                  <li>
-                    <hr className="dropdown-divider" />
-                  </li>
-                  <li>
-                    <span className="dropdown-item text-danger" onClick={handleLogout} style={{ cursor: "pointer" }}>
-                      Logout
-                    </span>
-                  </li>
+                  <li><span className="dropdown-item" onClick={() => navigate("/profile")} style={{ cursor: "pointer" }}>Profile</span></li>
+                  <li><span className="dropdown-item" onClick={() => navigate("/orders")} style={{ cursor: "pointer" }}>My Orders</span></li>
+                  <li><hr className="dropdown-divider" /></li>
+                  <li><span className="dropdown-item text-danger" onClick={handleLogout} style={{ cursor: "pointer" }}>Logout</span></li>
                 </ul>
               </li>
             )}
