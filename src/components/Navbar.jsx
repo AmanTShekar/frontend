@@ -11,16 +11,29 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    dispatch(logout());          // clears Redux state and localStorage
-    navigate("/login");          // redirect
+  const handleLogout = (e) => {
+    e.preventDefault(); // stop dropdown from closing incorrectly
+    dispatch(logout()); // clears Redux state + localStorage
+    localStorage.removeItem("user"); // safety
+    localStorage.removeItem("token"); // safety
+    navigate("/login", { replace: true }); // redirect safely
   };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark" style={{ backgroundColor: "#111" }}>
+    <nav
+      className="navbar navbar-expand-lg navbar-dark"
+      style={{ backgroundColor: "#111" }}
+    >
       <div className="container">
-        <Link className="navbar-brand fw-bold fs-3" to="/">🛍️ MyShop</Link>
-        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <Link className="navbar-brand fw-bold fs-3" to="/">
+          🛍️ MyShop
+        </Link>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
@@ -30,9 +43,16 @@ const Navbar = () => {
                 <Link
                   className="nav-link fw-bold btn btn-dark btn-lg px-4 py-2 rounded-pill text-light"
                   to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
-                  style={{ transition: "all 0.3s", backgroundColor: "#1a1a1a" }}
-                  onMouseEnter={(e) => (e.target.style.backgroundColor = "#333")}
-                  onMouseLeave={(e) => (e.target.style.backgroundColor = "#1a1a1a")}
+                  style={{
+                    transition: "all 0.3s",
+                    backgroundColor: "#1a1a1a",
+                  }}
+                  onMouseEnter={(e) =>
+                    (e.target.style.backgroundColor = "#333")
+                  }
+                  onMouseLeave={(e) =>
+                    (e.target.style.backgroundColor = "#1a1a1a")
+                  }
                 >
                   {item}
                 </Link>
@@ -44,9 +64,16 @@ const Navbar = () => {
                 <Link
                   className="btn btn-warning btn-lg px-4 py-2 rounded-pill fw-bold text-dark"
                   to="/login"
-                  style={{ background: "linear-gradient(135deg, #ffb347, #ffcc33)", transition: "all 0.3s" }}
+                  style={{
+                    background:
+                      "linear-gradient(135deg, #ffb347, #ffcc33)",
+                    transition: "all 0.3s",
+                  }}
                   onMouseEnter={(e) => (e.target.style.background = "#ffb347")}
-                  onMouseLeave={(e) => (e.target.style.background = "linear-gradient(135deg, #ffb347, #ffcc33)")}
+                  onMouseLeave={(e) =>
+                    (e.target.style.background =
+                      "linear-gradient(135deg, #ffb347, #ffcc33)")
+                  }
                 >
                   Login
                 </Link>
@@ -58,17 +85,50 @@ const Navbar = () => {
                   type="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
-                  style={{ cursor: "pointer", backgroundColor: "#1a1a1a", transition: "all 0.3s" }}
-                  onMouseEnter={(e) => (e.target.style.backgroundColor = "#333")}
-                  onMouseLeave={(e) => (e.target.style.backgroundColor = "#1a1a1a")}
+                  style={{
+                    cursor: "pointer",
+                    backgroundColor: "#1a1a1a",
+                    transition: "all 0.3s",
+                  }}
+                  onMouseEnter={(e) =>
+                    (e.target.style.backgroundColor = "#333")
+                  }
+                  onMouseLeave={(e) =>
+                    (e.target.style.backgroundColor = "#1a1a1a")
+                  }
                 >
                   👤 {auth.user?.name || "User"}
                 </button>
                 <ul className="dropdown-menu dropdown-menu-end">
-                  <li><span className="dropdown-item" onClick={() => navigate("/profile")} style={{ cursor: "pointer" }}>Profile</span></li>
-                  <li><span className="dropdown-item" onClick={() => navigate("/orders")} style={{ cursor: "pointer" }}>My Orders</span></li>
-                  <li><hr className="dropdown-divider" /></li>
-                  <li><span className="dropdown-item text-danger" onClick={handleLogout} style={{ cursor: "pointer" }}>Logout</span></li>
+                  <li>
+                    <span
+                      className="dropdown-item"
+                      onClick={() => navigate("/profile")}
+                      style={{ cursor: "pointer" }}
+                    >
+                      Profile
+                    </span>
+                  </li>
+                  <li>
+                    <span
+                      className="dropdown-item"
+                      onClick={() => navigate("/orders")}
+                      style={{ cursor: "pointer" }}
+                    >
+                      My Orders
+                    </span>
+                  </li>
+                  <li>
+                    <hr className="dropdown-divider" />
+                  </li>
+                  <li>
+                    <button
+                      className="dropdown-item text-danger"
+                      onClick={handleLogout}
+                    >
+                      Logout
+                    </button>
+                  </li>
                 </ul>
               </li>
             )}
